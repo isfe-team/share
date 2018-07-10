@@ -31,20 +31,62 @@
           <h2>一些潜在的坑</h2>
           <section>
             <h2>Array change detection</h2>
+            <p>数据变动检测，注意</p>
             <a href="https://vuejs.org/v2/guide/list.html#Array-Change-Detection" target="_blank">Document</a>
           </section>
-          <section><h2>Compenent update with key</h2></section>
-          <section><h2>__ob__ cloned</h2></section>
-          <section><h2>Lifecycle&lt;nested components&gt;</h2></section>
-          <section><h2>Memory | Event bind &amp; unbind</h2></section>
+          <section>
+            <h2>Compenent update with key</h2>
+            <p>当你使用自定义组件时，可能需要注意复用时的 watch</p>
+          </section>
+          <section>
+            <h2>__ob__ cloned</h2>
+            <p>当你赋值一个内部状态时，如果赋值的对象存在 `__ob__` 可能会有一些坑（更新异常，因为内部检测是否存在 `__ob__`）</p>
+          </section>
+          <section>
+            <h2>Lifecycle&lt;nested components&gt;</h2>
+            <p>注意内嵌组件时，各个组件的lifecycle hooks的执行顺序</p>
+          </section>
+          <section>
+            <h2>Memory | Event bind &amp; unbind</h2>
+            <p>注意内存，注意事件绑定与解绑</p>
+          </section>
         </section>
         </section>
         <section>
+          <h2>痛点</h2>
+          <section>
+            <h2>Props doww V.S. vuex</h2>
+            <p>props 透传麻烦、vuex 高耦合，我们如何取舍（注意 $attrs 和 $listeners）</p>
+          </section>
+          <section>
+            <h2>&lt;element-ui&gt;弹出层在body下，zIndex层级问题</h2>
+          </section>
+        </section>
+        <section>
           <h2>经验、积累</h2>
-          <section><h2>Initialize&lt;data function&gt;</h2></section>
-          <section><h2>Props down, emit up</h2></section>
-          <section><h2>Dispatcher</h2></section>
-          <section><h2>Deep watch &amp; Immediate watch</h2></section>
+          <section>
+            <h2>Initialize&lt;data function&gt;</h2>
+            <p>data 函数内可以做很多操作，并非是习惯性只能 `return { }`</p>
+          </section>
+          <section>
+            <h2>Props down, emit up</h2>
+            <p>注意单向数据流</p>
+          </section>
+          <section>
+            <h2>Dispatcher</h2>
+            <p>组件分发</p>
+          </section>
+          <section>
+            <h2>Deep watch &amp; Immediate watch</h2>
+            <p>
+              某些场景下可能需要深度监听
+              <br>
+              某些场景下 immediate 能简化逻辑
+            </p>
+          </section>
+          <section>
+            <h2>表单验证、可以在数据层做配置，校验等工作易于处理</h2>
+          </section>
         </section>
         <section>
         </section>
