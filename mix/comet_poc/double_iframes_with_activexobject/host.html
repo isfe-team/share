@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script type="text/javascript">
+    onmessage = function (event) {
+      event = event || window.event
+      document.getElementById('echo').innerText = 'accept message from remote: ' + event.data
+    }
+  </script>
+</head>
+<body>
+  <h1>Placeholder</h1>
+  <div id="echo"></div>
+  <iframe src="http://www.b.com:3000/inner.html"></iframe> 
+</body>
+</html>

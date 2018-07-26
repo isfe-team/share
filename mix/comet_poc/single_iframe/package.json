@@ -1,0 +1,17 @@
+{
+  "name": "window-postMessage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -p 8080 -o",
+    "server": "node server.js"
+  },
+  "keywords": [],
+  "author": "bqliu@iflytek.com",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
