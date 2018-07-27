@@ -12,9 +12,27 @@ function errorReceiver(event) {
 }
 
 function sendReq() {
-  var xhr = new XMLHttpRequest()
-  xhr.open('GET', 'http://127.0.0.1:8080')
-  xhr.send()
+  // var xhr = new XMLHttpRequest()
+  // xhr.open('GET', 'http://127.0.0.1:8080')
+  // xhr.send()
+
+  // 下面是测试 Promise 加入了之后是否有影响
+  new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        resolve(this.response)
+      }
+    }
+    xhr.open('GET', 'http://127.0.0.1:8080')
+    xhr.send()
+  })
+    .then(function (res) {
+      console.log('res:', res.slice(0, 10) + '...')
+    })
+    .catch(function (error) {
+      console.error(error.message)
+    })
 }
 
 var curDate = Date.now()
