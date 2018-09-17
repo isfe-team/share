@@ -5,9 +5,16 @@
   <title>Test</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <script type="text/javascript">
+    var reconnectTimer = null
     onmessage = function (event) {
       event = event || window.event
       document.getElementById('echo').innerText = 'accept message from remote: ' + event.data
+
+      clearTimeout(reconnectTimer)
+
+      reconnectTimer = setTimeout(funciton () {
+        notifyReconnect()
+      }, 2 * 1000)
     }
   </script>
 </head>

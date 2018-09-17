@@ -27,10 +27,18 @@
         parent.postMessage('请求 error', '*')
       }
     }
+
+    transferDoc.onerror = function () {
+      parent.postMessage('出错了', '*')
+    }
   }
 
   var closeHtmlFile = function () {
     transferDoc = null
+  }
+
+  window.onerror = function () {
+    parent.postMessage('出错了', '*')
   }
 
   window.onload = function () {
