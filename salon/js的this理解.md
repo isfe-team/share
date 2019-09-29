@@ -80,3 +80,35 @@ object.double()()
 object.doubleArrow()()
 
 ```
+
+5. 使用call,apply,bind，this指向绑定的对象(改变函数运行时的上下文)
+
+- call：将 this 的值准确设置到你选择的一个对象fn通过逗号分隔传递多个参数给函数。如：fn.call(this, param1, param2, ...)。最后，执行函数。
+
+- apply: 与call类似，差别在传参上有区别， fn.apply(this, [param1, param2])
+
+- bind: 与call和apply的区别在于，在改变完函数的上下文之后，不会立即执行，而是会返回一个新的函数，供我们再调用
+
+```js
+var obj = {
+  name: 'obj1',
+  fn: function (a, b) {
+    console.log(this.name)
+    console.log(a + b)
+  },
+  obj2: {
+    name: 'obj2',
+    fn2: function () {
+      console.log(this.name)
+    }
+  }
+}
+
+var fn = obj.fn
+fn()
+fn.call(obj, 1, 2)
+fn.apply(obj, [1, 2])
+var fn1 = fn.bind(obj, 1, 2)
+fn1()
+
+```
