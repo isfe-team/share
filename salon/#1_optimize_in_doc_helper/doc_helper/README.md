@@ -10,16 +10,12 @@ See `example/index.html`.
 
 ## Background
 
-1. vie 测听在长音频时卡顿，滚动时有明显的延迟。
-
-> Firefox 比 Chrome 表现更好一点。
-
-2. vie 测听在 Chrome 版本中搜索出错。
+1. vie 测听在长音频时卡顿，滚动时有明显的延迟（Firefox 比 Chrome 表现更好一点）
+2. vie 测听在 Chrome 版本中搜索出错（搜索结果不完整）
 
 ### Why
 
-1. 卡顿，长音频时 dom 元素较多，而 vie 中直接是基于 dom 一个个的搜索而且有很多冗余运算，导致长音频时，卡顿严重。
-
+1. 卡顿，长音频时 dom 元素较多，而 vie 中直接是基于 dom 一个个的搜索而且有很多冗余运算，导致长音频时播放时卡顿严重，而且如果用户滚动，能感受到明显延迟
 2. 分词导致搜索不对（ie 版本正确，Chrome 版本很迷）
 
 ### How
@@ -39,6 +35,19 @@ See `example/index.html`.
 3. 增加 throttle 节流措施
 
 前提：设计良好的数据结构。
+
+##### 思考流程
+
+1. 设计良好的 DOM 结构
+2. 设计良好的 数据结构（Render） Config HighlightConfig HighlightPatch SearchedWordConfig
+3. 设计 DOM Render
+4. 设计 Diff & Patch
+5. 细节优化（Throttle、CSS 继承）
+6. 设计 搜索相关数据结构 SearchedWordConfig HightlightWord
+7. 设计 搜索算法
+8. 设计 上一个和下一个算法
+
+> 其它优化：增加 type，优化 coding 体验，降低出错率。
 
 ##### 流程设计
 
