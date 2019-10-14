@@ -1,0 +1,22 @@
+{
+  "name": "first",
+  "version": "1.0.0",
+  "description": "first try",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pdfjs": "^2.0.0-alpha.3",
+    "the-answer": "^1.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^0.43.0",
+    "rollup-plugin-amd": "^1.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}

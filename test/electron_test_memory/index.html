@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button id="open" $onclick="window.open('./blank.html', '_blank')">window open</button>
+    <button onclick="window.open('./index.html', '_self')">reload</button>
+    <button onclick="global.gc();">gc</button>
+    <script type="text/javascript">
+      document.querySelector('#open').addEventListener('click', evt => {
+        window.open('./blank.html', '_blank', w => {
+          w.once('closed', evt => {
+            w = null
+          })
+        })
+      })
+    </script>
+</body>
+</html>

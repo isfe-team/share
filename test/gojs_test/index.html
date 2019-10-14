@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Gojs test</title>
+    <style type="text/css">
+      .operations {
+        display: flex;
+        height: 80px;
+        margin-bottom: 10px;
+      }
+
+      .operation-list {
+        flex: 0 0 100px;
+      }
+
+      #palette {
+        flex: 1 1 auto;
+        border: 1px solid #000;
+      }
+
+      .diagram-container {
+        display: flex;
+        height: 500px;
+      }
+
+      #diagram {
+        flex: 1 1 50%;
+        /*background: lightblue;*/
+        box-shadow: 0 0 5px #000;
+      }
+
+      #diagram_data {
+        flex: 1 1 50%;
+        margin: 0;
+        padding: 1em;
+        overflow: auto;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      }
+    </style>
+    <script type="text/javascript" src="./go.bak.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Hello Gojs</h1>
+      <div class="operations">
+        <ul class="operation-list">
+          <li><button onclick="appendDiagramData()">获取图数据</button></li>
+        </ul>
+        <div id="palette"></div>
+      </div>
+      <div class="diagram-container">
+        <div id="diagram"></div>
+        <pre id="diagram_data"></pre>
+      </div>
+    </div>
+    <script type="text/javascript" src="./sample.js"></script>
+  </body>
+</html>

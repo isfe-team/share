@@ -1,0 +1,29 @@
+{
+    "version": "xx.xxx.xxx",
+    "main": "index.html",
+    "name": "test-memory",
+    "domain": "vulcan.jikji.test.memory",
+    "node-remote": [
+        "<all_urls>"
+    ],
+    "nodejs": true,
+    "new_instance": false,
+    "js-flags": "--harmony --expose-gc",
+    "chromium-args": "--mixed-context",
+    "window": {
+        "title": "",
+        "width": 400,
+        "height": 300,
+        "min_width": 150,
+        "min_height": 150,
+        "resizable": false,
+        "fullscreen": false,
+        "show": true,
+        "frame": true,
+        "transparent": false,
+        "show_in_taskbar": true
+    },
+    "webkit": {
+        "plugin": false
+    }
+}

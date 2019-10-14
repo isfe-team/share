@@ -1,0 +1,16 @@
+commonjs规范：http://www.commonjs.org/
+
+AMD API:https://github.com/amdjs/amdjs-api/wiki/AMD
+
+requirejs中文网:http://www.requirejs.cn/
+
+JavaScript AMD 模块加载器原理与实现: http://www.tuicool.com/articles/2eiqY3M
+
+AMD规范及require.js用法:http://ourjs.com/detail/52ad26ff127c76320300001f
+
+CMD
+seajs:http://seajs.org/docs/#intro
+
+CommonJS，AMD，CMD:http://www.cnblogs.com/skylar/p/4065455.html
+
+前端模块管理器简介(bower/Component/Browserify/Duo):http://www.ruanyifeng.com/blog/2014/09/package-management.html

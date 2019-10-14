@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>学习分享</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	<style type="text/css">
+		.img{
+			width: 450px;
+			height: 400px;
+		}
+	</style>
+	</head>
+	<body>
+		<div class="reveal">
+        <div class="slides">
+            <section>
+           <!--  <pre><code data-trim>
+              console.log('hello reveal.js!');
+            </code></pre> -->
+            	<h2>工作分享</h2>
+            	<p>杨颖</p>
+                <p>2017.02.13-2017.10.13</p>
+            </section>
+            </section>
+            <section>
+                <h2>目录</h2>
+            	<p class="fragment">一、业务组工作内容</p>
+            	<p class="fragment">二、永不止尽的挖坑，填坑</p>
+                <p class="fragment">三、前端职能组的学习与收获</p>
+                <p class="fragment">四、学校到职场的角色转换</p>
+                <p class="fragment">五、交流环节</p>
+            </section>
+            <section>
+	            <section>
+		            <h4>一、业务组工作内容</h4>
+	        	</section>
+	        	<section>
+					<h4> 一. 参与项目</h4>
+					<p> 产品基线1.0（产品可视化版本）</p>
+					<p> 中国人寿 </p>
+					<img src="img/AIManage.png" class="img">	
+					<img src="img/ChinaLife.png" class="img">
+	        	</section>
+	        	<section data-separator-notes="^Note:">
+	        			<img src="img/require.png" style="display: none">
+						<h4> 二. 所用技术介绍</h4>
+						<p>1. SPA单页面应用</p>
+						<p>2. require+director框架</p>
+						<p>3. juicer模板引擎</p>
+						<p>4. less预处理语言</p>
+						<aside class="notes">
+						1.SPA单页Web应用，就是只有一张Web页面的应用，是加载单个HTML 页面并在用户与应用程序交互时动态更新该页面的Web应用程序。浏览器一开始会加载必需的HTML、CSS和JavaScript，所有的操作都在这张页面上完成，都由JavaScript来控制。因此，对单页应用来说模块化的开发和设计显得相当重要。
+						优点：经典MVC开发模式，前后端各负其责，ajax重前端，业务逻辑全部在本地操作，数据都需要通过AJAX同步、提交.
+						2.juicer轻量级javascript轻量级模板引擎，编译模板并根据数据立即渲染出结果
+						3. 是一门 CSS 预处理语言。
+						</aside>
+	        	</section>
+        	</section>
+			<section>
+				<section>
+					<h3>二. 永无止境的挖坑与填坑。。。</h3>
+				</section>
+				<section>
+					<p>1. 基线版本中流程拖拽功能和拖放冲突；浏览器截图生成的图片背景色是黑色</p>
+				</section>
+				<section data-separator-notes="^Note:">
+					<p>2. juicer渲染的数据需要处理</p>
+					<img src="img/juicer.png">
+					<img src="img/register.png" style="display: none">
+					<aside class="notes">
+					自定义函数-juicer.register(‘function_name’, function);
+					</aside>
+				</section>
+				<section data-separator-notes="^Note:">
+					<p>3. swiper插件（两个页面滑动过程中会卡住）<p>
+					<img src="img/swiper.png">
+					<aside class="notes">
+					1.客户端的缓存机制问题
+					2.偶尔两指滑动卡住是swiper自身插件问题，没有解决。
+					</aside>
+				</section>
+				<section>
+					<p>4. 自定义数字键跟系统自带键盘出现冲突</p>
+					<img src="img/keybord.png">
+				</section>
+				<section>
+					<p>5. SVN日志不写或者描写不详细</p>
+				</section>
+				<section>
+					<p>6. less层级太多</p>
+					<img src="img/less.png">
+				</section>
+				<!-- <section data-markdown>
+					<script type="text/javascript">
+						<p>7. $('#demo')获取的永远是对象，即使是网页上没有的元素</p>
+						<pre>错误：
+							<code>
+								if('#demo') {}
+	                		</code>
+	                	</pre>
+                		<pre>改正：
+	                		<code>
+								if('#demo'.length > 0) {}
+	                		</code>
+                			<code>
+								if('#demo'[0]) {}
+		            		</code>
+	                	</pre>
+					</script> 
+				</section> -->
+				<section data-separator-notes="^Note:">
+					<p>7. 事情代理机制使用过多</p>
+					<p class="fragment">解决方法：就近委托；不冒泡的事件不用事件委托</p>
+					<aside class="notes">
+						定义：当网页中需要触发事件的对象比较多时，为了避免内存泄漏，我们把事件委托到其父对象上，借助事件冒泡机制，可以将事件委托到body,document等元素上，这样等于一个页面就只有一个事件触发，避免直接把事件添加到多个对象上.
+						适用于：1、一个元素有多个子元素，子元素可能是动态添加的。
+						2、为多个不同操作统一委托（即订阅发布机制）
+						1.优点：1.管理的函数变少了。不需要为每个元素都添加监听函数。对于同一个父节点下面类似的子元素，可以通过委托给父元素的监听函数来处理事件。
+						2.可以方便地动态添加和修改元素，不需要因为元素的改动而修改事件绑定。
+						3.JavaScript和DOM节点之间的关联变少了，这样也就减少了因循环引用而带来的内存泄漏发生的概率。
+					2.缺点：
+					    1.事件委托基于冒泡，对于不冒泡的事件不支持。
+					    2.层级过多，冒泡过程中，可能会被某层阻止掉。
+					    3.理论上委托会导致浏览器频繁调用处理函数，虽然很可能不需要处理。所以建议就近委托，比如在table上代理td，而不是在document上代理td。
+					    4.把所有事件都用代理就可能会出现事件误判。比如，在document中代理了所有button的click事件，另外的人在引用改js时，可能不知道，造成单击button触发了两个click事件。
+					</aside>
+				</section>
+        	</section>
+            <section>
+	            <section>
+		            <h4>三、前端职能组的学习与收获</h4>
+	        	</section>
+	        	<section data-markdown>
+	        		<script type="text/javascript">
+						## 学习之路
+						- 机器人团队前端分享会
+						- 机器人团队框架培训
+						- 前端组技术分享会
+						- 前端组交流会
+						- 前端代码评审会
+					</script>
+	        	</section>
+	        	<section data-separator-notes="^Note:">
+						<h4> 收获之旅</h4>
+						<li> 如何搭建简单的SPA框架</li>
+						<li> ECMA2015部分新特性</li>
+						<li> 无for循环</li>
+						<li> Vue.js</li>
+						<li> 前端代码规范</li>
+						<li> 解决问题（擅用Chrom控制台）</li>
+						<li> 代码优化</li>
+						<li> 对想法的记录，总结</li>
+						<aside class="notes">
+						1.单页面，通过不同的url访问不同的页面状态,url的hash值,popstate事件
+						2.用 let 声明的变量具有块级作用域，只能在声明的块中访问，在块外面无法访问；使用const来声明的变量称之为常量。这意味着它们不能再次被赋值；箭头函数
+						3.数组迭代：$.each(array, [callback]) 遍历；$.map(array,[callback])按给定条件转换数组；filter(筛选出数组中符合条件的项，组成新数组)；
+						every(检测数组中每一项是否符合条件)；some(检测数组中是否有一项满足条件);
+						reduce(让数组中的前项和后项做某种计算，并累计最终值)；firstPositiveNum(返回第一个符合条件的数组成员);findIndex(返回第一个符合条件的数组成员的位置)
+						4.Vue.js指令和组件化应用构建
+						5.文件命名，编码格式，html,js,css等
+						6.描述场景；根据场景怀疑问题；确认问题（定位）；解决问题
+						7.代码冗余情况，设计问题，jQuery性能优化（缓存变量，避免全局变量，单var模式，链式操作，避免通用选择符等）
+						8.踩坑不可怕，可怕的是掉同样的坑
+						</aside>
+	        	</section>
+        	</section>
+            <section>
+                <section>
+		            <h4>四、初入职场的感悟</h4>
+	        	</section>
+	        	<section data-separator-notes="^Note:">
+		            <h4> 学生到员工的角色转换</h4>
+		            <p>1. 心态关</p>
+		            <p>2. 人际关系关</p>
+		            <p>3. 理想关</p>
+		            <p>4. 业务关</p>
+		            <p>5. 意识关</p>
+		            <p>6. 生活关</p>
+		            <p>7. 作风关</p>
+		            <p>8. 行为规范关</p>
+					<aside class="notes">
+					1.并没有摆正自己的位置，仍然觉得自己还是学生，从潜意识里非常留恋相对单纯的学生时代。领导给什么工作，就做什么，甚至老是依赖老员工，没有养成独立的工作观念，也没有对自己的工作有一个足够的认识。消极退缩，轻言放弃。现在的大学生心理素质较低，遇到问题不是想该如何解决，如何弥补，而是马上放弃。初从学校到社会，不适应、无名的失落和惆怅是很正常的。
+					2.对于新人来说，应端正自我认知，诚心向同事请教，踏实提高业务水平，友善待人，拿捏好分寸。应主动与其他人沟通 
+					3.学生期间总会有各种各样的理想，但理想并不等于现实。再好的单位，现实与理想之间还是有一定的差距。要理性地对待自己的工作，不能因为一时的成绩而得意忘形，也不能因为一时的挫折而垂头丧气。要有信心和耐心，要清楚地知道，成功是靠自己一步步走出来的。
+					4.工作中需要的知识常常是多方面的，专业对口还好，若专业不特别对口，需要补充的知识就太多了。初入职场，特别要注意避免眼高手低。“小事不愿干，大事干不了”是刚参加工作的人常犯的毛病。要注意大处着眼、小处着手，一丝不苟地做好每一件“小事”，可为以后做“大事”积累资源。
+					5.①单位最重要的是责任，远比兴趣来的重要。必须努力做到“干一行，爱一行”。②职场要求的是高度理性行为，要学会由情绪左右转变到职业驱动。③职场人考虑的往往是经营绩效和利润，会读书和会创造利润之间并不是天然的正相关。
+					6.其实，职场上的生活才是一个人真实的生存状态，工作和生活有矛盾，但并不是不可调和，在繁忙的工作之余，还是不要疏远了自己的亲属、朋友，要注意调整自己的状态。
+					7.在单位，就必须每天与自己的惰性作斗争，上班决不能迟到，如果能够比别人提前十几分钟到达办公室，提前收拾好卫生，对你尽快融入新同事之中很有帮助。另外，也要更加注意自己的仪表仪容，不仅是为了展示个人的良好形象，也是为了符合公司的风格。
+					8.每家公司都有严格的规章制度，作为新人必须绝对遵守，不能踩线。除了成文的规则外，通常还有一些约定俗成的习俗，一般来说，这些规则虽然公司没做硬性规定，但也需要自觉遵守
+					</aside>
+	        	</section>
+	        	<section>
+	        	<h4>贪---->贫</h4>
+	        	<p>在学校的技术学习多且不精</p>
+	        	<p>学习目标经常更换</p>
+	        	<p>工作场景和自学场景关注点不同</p>
+	        	</section>
+	        	<section>
+	        		<h4>团队工作的注意事项</h4>
+	        	</section>
+	        	<section data-markdown data-separator="---" data-separator-vertical="--">
+	        		<script type="text/javascript">
+			            - 前端方面
+			            	1. 代码的规范性，命名的规范（最好可以全局搜索一下）
+			            	2. SVN提交问题，提交前更新；提交时检查所有提交文档；日志描述尽量详细
+		            </script>
+        		</section>
+        		<section data-markdown data-separator="---" data-separator-vertical="--">
+	        		<script type="text/javascript">
+			            - 与后台，客户端的配合
+			            	1. 接口数据的类型转换（对象，数组，字符串之间的转换；数据的封装-造数据）
+			            	2. 函数方法的封装，调用
+			            - 与产品，测试的沟通
+			            	1. 需求不清楚的时候要第一时间找产品确认，不能自己去猜测
+			            	2. 测试提出的bug需要找测试人员沟通，确认复现方法
+		            </script>
+        		</section>
+            </section>
+            <section data-separator-notes="^Note:">
+            <aside class="notes">
+	        	个人总结：喜欢学习但是没有目标，容易放弃；代码设计上没有很好的考虑性能和代码冗余问题;
+	        	对于职能组的建议（新人培养计划，多实践）
+	        	<p>业务组和职能组的工作都很愉快，业务组完成任务很有成就感，同事之间的合作的也很好；在职能组学习到很多知识，也很认真的培养我们，工作生活上都很帮助鼓励我们，有坚强的后盾的感觉</p>
+            	<p>这个建议也是基于个人需求所提，新员工的成长计划，喜欢学习新事物，但不会分辨对接下来的项目的作用有多大，在工作时间学习的新技术如果对业务没有帮助会不会造成浪费工作量</p>
+        	</aside>
+				<h4> 五、交流环节</h4>
+            </section>
+        </div>
+    </div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+		    Reveal.initialize({
+			// 是否在右下角展示控制条
+			controls: true,
+			// 是否显示演示的进度条
+		    progress: true,
+
+		    // 是否显示当前幻灯片的页数
+		    slideNumber: 'c/t',
+
+		    // 是否启用键盘快捷键来导航
+		    keyboard: true,
+
+		    // 是否启用幻灯片的概览模式,开启后，可以使用ESC键查看幻灯片概览
+		    overview: true,
+
+		    // 是否将幻灯片垂直居中
+		    center: true,
+
+		    // 全局开启和关闭碎片
+		    fragments: true,
+
+		    // 切换过渡效果
+		    transition: 'default', // none/fade/slide/convex/concave/zoom
+
+		    // 过渡速度
+		    transitionSpeed: 'default', // default/fast/slow
+
+		    // 全屏幻灯片背景的过渡效果
+		    backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+		    //演讲者笔记对听众可见
+		    showNotes: false,
+
+		    dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+		});
+		</script>
+	</body>
+</html>
