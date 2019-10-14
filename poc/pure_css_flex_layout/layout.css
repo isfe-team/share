@@ -1,0 +1,233 @@
+/*!
+ * A layout framework with flex
+ * bq-hentai | 11/20/2017
+ */
+.ht-row,
+.ht-column {
+  display: flex;
+}
+.ht-wrap {
+  flex-wrap: wrap;
+}
+.ht-row {
+  flex-direction: row;
+}
+.ht-column {
+  flex-direction: column;
+}
+.ht-col-1 {
+  width: 4.16666667%;
+}
+.ht-col-2 {
+  width: 8.33333333%;
+}
+.ht-col-3 {
+  width: 12.5%;
+}
+.ht-col-4 {
+  width: 16.66666667%;
+}
+.ht-col-5 {
+  width: 20.83333333%;
+}
+.ht-col-6 {
+  width: 25%;
+}
+.ht-col-7 {
+  width: 29.16666667%;
+}
+.ht-col-8 {
+  width: 33.33333333%;
+}
+.ht-col-9 {
+  width: 37.5%;
+}
+.ht-col-10 {
+  width: 41.66666667%;
+}
+.ht-col-11 {
+  width: 45.83333333%;
+}
+.ht-col-12 {
+  width: 50%;
+}
+.ht-col-13 {
+  width: 54.16666667%;
+}
+.ht-col-14 {
+  width: 58.33333333%;
+}
+.ht-col-15 {
+  width: 62.5%;
+}
+.ht-col-16 {
+  width: 66.66666667%;
+}
+.ht-col-17 {
+  width: 70.83333333%;
+}
+.ht-col-18 {
+  width: 75%;
+}
+.ht-col-19 {
+  width: 79.16666667%;
+}
+.ht-col-20 {
+  width: 83.33333333%;
+}
+.ht-col-21 {
+  width: 87.5%;
+}
+.ht-col-22 {
+  width: 91.66666667%;
+}
+.ht-col-23 {
+  width: 95.83333333%;
+}
+.ht-col-24 {
+  width: 100%;
+}
+.ht-offset-1 {
+  margin-left: 4.16666667%;
+}
+.ht-offset-2 {
+  margin-left: 8.33333333%;
+}
+.ht-offset-3 {
+  margin-left: 12.5%;
+}
+.ht-offset-4 {
+  margin-left: 16.66666667%;
+}
+.ht-offset-5 {
+  margin-left: 20.83333333%;
+}
+.ht-offset-6 {
+  margin-left: 25%;
+}
+.ht-offset-7 {
+  margin-left: 29.16666667%;
+}
+.ht-offset-8 {
+  margin-left: 33.33333333%;
+}
+.ht-offset-9 {
+  margin-left: 37.5%;
+}
+.ht-offset-10 {
+  margin-left: 41.66666667%;
+}
+.ht-offset-11 {
+  margin-left: 45.83333333%;
+}
+.ht-offset-12 {
+  margin-left: 50%;
+}
+.ht-offset-13 {
+  margin-left: 54.16666667%;
+}
+.ht-offset-14 {
+  margin-left: 58.33333333%;
+}
+.ht-offset-15 {
+  margin-left: 62.5%;
+}
+.ht-offset-16 {
+  margin-left: 66.66666667%;
+}
+.ht-offset-17 {
+  margin-left: 70.83333333%;
+}
+.ht-offset-18 {
+  margin-left: 75%;
+}
+.ht-offset-19 {
+  margin-left: 79.16666667%;
+}
+.ht-offset-20 {
+  margin-left: 83.33333333%;
+}
+.ht-offset-21 {
+  margin-left: 87.5%;
+}
+.ht-offset-22 {
+  margin-left: 91.66666667%;
+}
+.ht-offset-23 {
+  margin-left: 95.83333333%;
+}
+.ht-offset-24 {
+  margin-left: 100%;
+}
+.ht-order-1 {
+  order: 10;
+}
+.ht-order-2 {
+  order: 20;
+}
+.ht-order-3 {
+  order: 30;
+}
+.ht-order-4 {
+  order: 40;
+}
+.ht-order-5 {
+  order: 50;
+}
+.ht-order-6 {
+  order: 60;
+}
+.ht-order-7 {
+  order: 70;
+}
+.ht-order-8 {
+  order: 80;
+}
+.ht-order-9 {
+  order: 90;
+}
+.ht-order-10 {
+  order: 100;
+}
+.ht-order-11 {
+  order: 110;
+}
+.ht-order-12 {
+  order: 120;
+}
+.ht-order-13 {
+  order: 130;
+}
+.ht-order-14 {
+  order: 140;
+}
+.ht-order-15 {
+  order: 150;
+}
+.ht-order-16 {
+  order: 160;
+}
+.ht-order-17 {
+  order: 170;
+}
+.ht-order-18 {
+  order: 180;
+}
+.ht-order-19 {
+  order: 190;
+}
+.ht-order-20 {
+  order: 200;
+}
+.ht-order-21 {
+  order: 210;
+}
+.ht-order-22 {
+  order: 220;
+}
+.ht-order-23 {
+  order: 230;
+}
+.ht-order-24 {
+  order: 240;
+}

@@ -1,0 +1,53 @@
+/*!
+ * A layout framework with flex
+ * bq-hentai | 11/20/2017
+ */
+
+.generate-cols(@n, @i: 1) when (@i =< @n) {
+  .ht-col-@{i} {
+    width: (@i * 100% / @n);
+  }
+
+  .generate-cols(@n, (@i + 1));
+}
+
+.generate-offsets(@n, @i: 1) when (@i =< @n) {
+  .ht-offset-@{i} {
+    margin-left: (@i * 100% / @n);
+  }
+
+  .generate-offsets(@n, (@i + 1));
+}
+
+.generate-orders(@n, @i: 1) when (@i =< @n) {
+  .ht-order-@{i} {
+    order: (@i * 10);
+  }
+
+  .generate-orders(@n, (@i + 1));
+}
+
+.ht-row,
+.ht-column {
+  display: flex;
+}
+
+.ht-wrap {
+  flex-wrap: wrap;
+}
+
+.ht-row {
+  flex-direction: row;
+}
+
+.ht-column {
+  flex-direction: column;
+}
+
+.ht-item {
+  flex: 1 1 auto;
+}
+
+.generate-cols(24);
+.generate-offsets(24);
+.generate-orders(24);

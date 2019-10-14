@@ -1,0 +1,67 @@
+<!--
+ - test fps
+ - @see https://zhuanlan.zhihu.com/p/39292837
+ - @see https://segmentfault.com/a/1190000010229232
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test fps</title>
+  <style type="text/css">
+    body {
+      text-transform: uppercase;
+    }
+  </style>
+  <script type="text/javascript" src="./scripts/fps.js"></script>
+</head>
+<body>
+  <h1>fps</h1>
+  <script type="text/javascript">
+    window.onload = function () {
+      var fpsList = [ ]
+
+      function isBlocked (fpsList, below, last) {
+        // console.log(fpsList.slice())
+        below = below || 20
+        last = last || 3
+
+        var count = 0
+        for (var i = 0; i < fpsList.length; ++i) {
+          if (fpsList[i] < below) {
+            count += 1
+          }
+          else {
+            count = 0
+          }
+
+          if (count > last) {
+            return true
+          }
+        }
+
+        return false
+      }
+
+      fpsCalculator.setCallback(function (fps) {
+        fpsList.push(fps)
+
+        // 不考虑 70 是否是 blocking 的状态
+        // if (fpsList.length > 70) {
+          fetch('http://localhost:8080')
+          // console.log('isBlocked', isBlocked(fpsList))
+          // fpsList.length = 0
+          console.log(fpsList.slice(0, 10))
+        // }
+      })
+
+      setTimeout(function () {
+        for(var i = 0; i < 10000000000; i++) { }
+      }, 1000)
+
+      fpsCalculator.startCalculate()
+    }
+  </script>
+</body>
+</html>

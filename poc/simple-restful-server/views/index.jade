@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div#app
+    h1= title
+    p Welcome to #{title}
+    p And the another welcome message is {{ message }}
+    button(@click='getProduct(2)') getProduct(2)
+    button(@click='pushProduct()') pushProduct()
+    button(@click='deleteProduct(1)') deleteProduct(1)
+
+    p#title(v-show='show') you will see me
+
+  script(type='text/javascript', src='/javascripts/index.js')
