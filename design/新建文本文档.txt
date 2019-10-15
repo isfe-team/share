@@ -1,0 +1,18 @@
+js常见设计模式系列：http://www.alloyteam.com/2012/10/common-javascript-design-patterns/
+“主要的编程范型”及其语言特性关系:http://blog.csdn.net/aimingoo/article/details/4648284
+四火的编程范型详解:http://www.udpwork.com/item/11758.html
+http://www.raychase.net/2310
+面向对象博文列表
+http://www.iteye.com/blogs/tag/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1
+Javascript 面向对象编程:
+http://blog.jobbole.com/11691/
+http://blog.jobbole.com/13881/
+阮一峰博客：
+http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html
+trigkit4博客：
+https://segmentfault.com/a/1190000000713346
+Mark Allen Weiss个人主页:users.cis.fiu.edu/~weiss/
+1. 数据结构学习笔记:http://www.cnitblog.com/weitom1982/archive/2006/03/30/8298.html
+2. 博客专栏-数据结构与算法随笔:http://blog.csdn.net/column/details/dsandal.html
+3. 严蔚敏 数据结构：http://download.csdn.net/detail/zhao3821/1348471
+4. 进程相关数据结构：http://blog.chinaunix.net/uid-25940216-id-3226190.html
