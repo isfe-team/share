@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.js"></script>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<input type="text" ng-model="name">
+<br>
+{{name}}
+<br>
+<button ng-click="handleClick()">点击调用settimeout，1s后修改name的值</button>
+<button ng-click="handleClick1()">点击调用$timeout，1s后修改name的值</button>
+<button ng-click="handleClick2()">点击调用改造的_timeout，1s后修改name的值</button>
+<br>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $timeout) {
+    $scope.name = "hello";
+    $scope.handleClick = function () {
+        // 思考下为何dom值没有更新
+        setTimeout(function () {
+            $scope.name = '$apply后，改了改了';
+            // $scope.$apply();
+        }, 1000)
+    }
+    $scope.handleClick1 = function () {
+        $timeout(function () {
+            $scope.name = '$timeout改了改了';
+        }, 1000)
+    }
+
+    $scope.handleClick2 = function () {
+        _timeout(function () {
+            $scope.name = '改造后，改了改了';
+        }, 1000)
+    }
+
+    // 简单包装一下
+    function _timeout(fn, time) {
+        return setTimeout(function () {
+            fn()
+            $scope.$apply();
+        }, time)
+    }
+});
+</script>
+
+</body>
+</html>
