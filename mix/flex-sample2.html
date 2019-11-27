@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+
+   .flex
+   {
+      /* 基本样式 */
+      width: 350px;
+      height: 200px;
+      border: 1px solid #555;
+      font: 14px Arial;
+
+      /*  建立弹性框 */
+      display: -webkit-flex;
+      -webkit-flex-direction: row;
+
+      display: flex;
+      flex-direction: row;
+   }
+
+   .flex > div
+   {
+      -webkit-flex: 1 1 auto;
+      flex: 1 1 auto;
+
+      width: 30px; /* 让过渡表现良好。（从/到"width:auto"的过渡
+                      至少在 Gecko 和 Webkit 上是有 bug 的。
+                      更多信息参见 http://bugzil.la/731886 ） */
+
+      -webkit-transition: width 0.7s ease-out;
+      transition: width 0.7s ease-out;
+   }
+
+   /* colors */
+   .flex > div:nth-child(1){ background : #009246; }
+   .flex > div:nth-child(2){ background : #F1F2F1; }
+   .flex > div:nth-child(3){ background : #CE2B37; }
+
+   .flex > div:hover
+   {
+        width: 200px;
+   }
+   
+   </style>
+    
+ </head>
+ <body>
+  <p>Flexbox nuovo</p>
+  <div class="flex">
+    <div>uno</div>
+    <div>due</div>
+    <div>tre</div>
+  </div>
+
+  <h4>This is a Flex-Grow</h4>
+  <h5>A,B,C and F are flex-shrink:1 . D and E are flex-grow:1 .</h5>
+  <div id="content">
+    <div class="box" style="background-color:red;">A</div>
+    <div class="box" style="background-color:lightblue;">B</div>
+    <div class="box" style="background-color:yellow;">C</div>
+    <div class="box1" style="background-color:brown;">D</div>
+    <div class="box1" style="background-color:lightgreen;">E</div>
+    <div class="box" style="background-color:brown;">F</div>
+  </div>
+
+  <style type="text/css">
+    #content {
+      -ms-box-orient: horizontal;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -moz-flex;
+      display: -webkit-flex;
+      display: flex;
+
+      -webkit-justify-content: space-around;
+      justify-content: space-around;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+      -webkit-align-items: stretch;
+      align-items: stretch;
+    }
+
+    .box {
+    flex-shrink: 1;
+    border: 3px solid rgba(0,0,0,.2);
+    }
+
+    .box1 {
+    flex-grow: 1;
+    border: 3px solid rgba(0,0,0,.2);
+    }
+  </style>
+ </body>
+</html>

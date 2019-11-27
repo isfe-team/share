@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>²¨ÎÆ°´Å¥</title>
+        <style>
+			*{box-sizing:border-box;margin:0;padding:0}
+			.bowen{
+				position:relative;
+				width:400px;
+				height:400px;
+			}
+			.bowen-btn{
+				border: 2px solid #888;
+				display:block;
+				width:100px;
+				height:100px;
+				border-radius:50%;
+				background:#f8f8f8;
+				line-height:100px;
+				text-align:center;
+				text-decoration:none;
+				color:#888;
+				position:absolute;
+				top:50%;
+				left:50%;
+				margin-left:-50px;
+				margin-top:-50px;
+			}
+			.bowen-xian{
+				position:absolute;
+				top:0;
+				bottom:0;
+				left:0;
+				right:0;
+				margin:auto;
+				width:100px;
+				height:100px;
+				border: 2px solid #888;
+				border-radius:50%;
+				-webkit-animation: bowen-xian 2s linear infinite;
+				-moz-animation: bowen-xian 2s linear infinite;
+				-o-animation: bowen-xian 2s linear infinite;
+				animation: bowen-xian 2s linear infinite;
+			}
+			.bowen-xian.second{
+				-webkit-animation-delay: .5s;
+				-moz-animation-delay: .5s;
+				-o-animation-delay: .5s;
+				animation-delay: .5s;
+			}
+			.bowen-xian.third{
+				-webkit-animation-delay: 1s;
+				-moz-animation-delay: 1s;
+				-o-animation-delay: 1s;
+				animation-delay: 1s;
+			}
+			.bowen-xian.fourth{
+				-webkit-animation-delay: 1.5s;
+				-moz-animation-delay: 1.5s;
+				-o-animation-delay: 1.5s;
+				animation-delay: 1.5s;
+			}
+			@-webkit-keyframes bowen-xian{
+				0%{}
+				100%{width:100%;
+					height:100%;
+					border-color:#fff;
+				}
+			}
+			@-moz-keyframes bowen-xian{
+				0%{}
+				100%{width:100%;
+					height:100%;
+					border-color:#fff;
+				}
+			}
+			@-o-keyframes bowen-xian{
+				0%{}
+				100%{width:100%;
+					height:100%;
+					border-color:#fff;
+				}
+			}
+			@keyframes bowen-xian{
+				0%{}
+				100%{width:100%;
+					height:100%;
+					border-color:#fff;
+				}
+			}
+        </style>
+    </head>
+    <body>
+        <div class="bowen">
+			<div class="bowen-xian"></div>
+			<div class="bowen-xian second"></div>
+			<div class="bowen-xian third"></div>
+			<div class="bowen-xian fourth"></div>
+			<a class="bowen-btn" href="javascript:;">°´Å¥</a>
+        </div>
+    </body>
+</html>

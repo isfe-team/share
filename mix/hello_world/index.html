@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="./node_modules/reveal.js/css/reveal.css">
+    <link rel="stylesheet" type="text/css" href="./node_modules/reveal.js/css/theme/black.css">
+    <link rel="stylesheet" type="text/css" href="./node_modules/reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script src="./node_modules/headjs/dist/1.0.0/head.js"></script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Hello World</h1>
+          <div>Presented by bqliu</div>
+        </section>
+        <section>
+          <h2>
+            Why people say:
+            <br>
+            <br>
+            Front-end development is easy ?
+          </h2>
+        </section>
+        <section>
+          <div>For `Hello World` implements:</div>
+          <div>
+            We can use following code.
+            <pre><code>console.log('hello world')</code></pre>
+            Or we can use a html file.
+            <pre><code>echo Hello world >> hello-world.html</code></pre>
+            Then open it with your browser.
+          </div>
+        </section>
+        <section>YEAH, YOU WILL SEE...</section>
+        <section><div class="with-code" data-step="0"></div></section>
+        <section>Oh f**k, so easy!</section>
+        <section>
+          But, we can't do this, we'll do more.
+          <br>
+          See...
+        </section>
+        <section><div class="with-code" data-step="1"></div></section>
+        <section><h3>Make it more beautiful</h3></section>
+        <section><h3>Move to the central of the page</h3></section>
+        <section><div class="with-code" data-step="2"></div></section>
+        <section>For visual appeal, it's better to move to top٩(๑&gt;◡&lt;๑)۶ .</section>
+        <section><div class="with-code" data-step="3"></div></section>
+        <section><h3>Make some transformations or anything else?</h3></section>
+        <section><div class="with-code" data-step="4"></div></section>
+        <section>
+          For me, the style is good enough.
+          <br>
+          But, let's do sth. different.
+        </section>
+        <section><h3>Get the message from server</h3></section>
+        <section><div class="with-code" data-step="5"></div></section>
+        <section><h3>Add loading state</h3></section>
+        <section><div class="with-code" data-step="6"></div></section>
+        <section>But if the delay is less than 200ms, the loading is ANNOYING.</section>
+        <section><div class="with-code" data-step="7"></div></section>
+        <section>Very good, but when some error occurred...</section>
+        <section><div class="with-code" data-step="8"></div></section>
+        <section><h2>WTF! Handle error NOW!</h2></section>
+        <section><div class="with-code" data-step="9"></div></section>
+        <section><h3>Wait, when should we handle error?????</h3></section>
+        <section>
+          <h4>Which one</h4>
+          <pre><code>
+  // #0
+  load().then(setMessage).catch(handleError)
+
+  // #1
+  load().then(setMessage, handleNetError).catch(handleScriptError)
+          </code></pre>
+        </section>
+        <section><h3>Load message at first</h3></section>
+        <section><div class="with-code" data-step="10"></div></section>
+        <section><h3>Feedback</h3></section>
+        <section><div class="with-code" data-step="11"></div></section>
+        <section><h3>Polling?</h3></section>
+        <section><div class="with-code" data-step="12"></div></section>
+        <section><h3>Save the last message in local storage</h3></section>
+        <section><h3>Multiple welcome message component?</h3></section>
+        <section><h3>Error?</h3></section>
+        <section><h3>Reload when error</h3></section>
+        <section><h3>How about message categories</h3></section>
+        <section>
+          <h3>Load at first?</h3>
+          <h3>Local storage?</h3>
+          <h3>Cache?</h3>
+          <h3>Reload when no cache?</h3>
+          <h3>Error?</h3>
+        </section>
+        <section>
+          <section>1</section>
+          <section>2</section>
+          <section>3</section>
+          <section>4</section>
+        </section>
+      </div>
+
+      <script src="./node_modules/reveal.js/js/reveal.js"></script>
+      <script src="./run.js"></script>
+    </div>
+  </body>
+</html>

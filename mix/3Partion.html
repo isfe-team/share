@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TEST FLEX</title>
+    <style>
+      .wrapper {
+
+      }
+
+      .flex-sample {
+        overflow: hidden;
+        display: flex;
+        flex: 1 0 auto;
+        flex-wrap: nowrap;
+        max-width: 500px;
+        margin: 50px 50px;
+        background: yellow;
+      }
+
+      .flex-sample * {
+        flex: 1 1 auto;
+        box-sizing: border-box;
+      }
+      .prefix, .postfix {
+        text-transform: uppercase;
+        padding: 5px 10px;
+      }
+      .prefix {
+        background-color: #eee;
+      }
+      .postfix {
+        background-color: #abc;
+      }
+      .in {
+        border: 1px solid #bfc;
+      }
+
+
+      .thp {
+        width: 80%;
+        background-color: red;
+        height: 20px;
+      }
+
+      .thp * {
+        height: 100%;
+      }
+
+      .thp-1 {
+        float: left;
+        width: 20px;
+        background-color: yellow;
+      }
+
+      .thp-2 {
+        margin: 0 50px 0 20px;
+        background-color: black;
+      }
+
+      .thp-3 {
+        position: relative;
+        float: right;
+        top: -100%;
+        width: 50px;
+        background-color: grey;
+      }
+    </style>
+  </head>
+  <body class="radial-bg">
+    <div id="app" class="wrapper">
+      <div class="flex-sample">
+        <span class="prefix">prefix</span>
+        <input class="in">
+        <!-- <span>LOOK</span> -->
+        <span class="postfix">postfix</span>
+      </div>
+
+      <div class="thp">
+        <div class="thp-1"></div>
+        <div class="thp-2"></div>
+        <div class="thp-3"></div>
+      </div>
+    </div>
+  </body>
+</html>

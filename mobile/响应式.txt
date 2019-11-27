@@ -1,0 +1,11 @@
+概念：https://developer.mozilla.org/en-US/docs/Web/Guide/Responsive_design
+Responsive Patterns：http://bradfrost.github.io/this-is-responsive/patterns.html
+Bootstrap：https://github.com/twbs/bootstrap
+Media Query：http://www.w3cplus.com/content/css3-media-queries
+设备像素比devicePixelRatio简单介绍：http://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio/
+觉唯移动web开发常见问题解决方案：http://www.jiawin.com/mobile-web-development-solution
+移动端Web开发调试之Chrome远程调试(Remote Debugging)：http://blog.csdn.net/freshlover/article/details/42528643
+
+前端API汇总：http://www.kancloud.cn/jikeytang/qq/81135
+前端公众号：前端早读课
+
