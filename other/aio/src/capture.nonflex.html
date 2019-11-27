@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <title>Flow Chart</title>
+    <script src="./html2canvas.js"></script>
+    <!-- <script src="../node_modules/html2canvas/dist/html2canvas.js"></script> -->
+    <style>
+      html, body, #root {
+        width: 100%;
+        /* height: 100%; */
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      /* flex 存在一点问题 */
+      #root {
+        padding: 4em;
+      }
+
+      .host-list {
+        float: left;
+        width: 400px;
+        height: 400px;
+        overflow: auto;
+      }
+
+      .host-list .host {
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        margin: 0 0 50px 0;
+        padding: 0;
+        list-style: none;
+        overflow: auto;
+      }
+
+      .host-list .host.capturing {
+        height: auto;
+        overflow: visible;
+      }
+
+      .presenter {
+        position: relative;
+        float: right;
+        width: 400px;
+        min-height: 400px;
+        box-shadow: 0 0 6px #000;
+      }
+
+      .presenter::before {
+        content: "截图结果：";
+        position: absolute;
+        top: -40px;
+        left: -20px;
+      }
+    </style>
+    <script>
+      var $ = document.querySelector.bind(document)
+      window.onload = function () {
+        var $hostList = $('.host-list')
+        var present = function (canvas) {
+          var $presenter = $('.presenter')
+          // $presenter.style.height = canvas.height + 'px'
+          // $presenter.offsetHeight
+          $presenter.firstChild ? $presenter.firstChild.replaceWith(canvas) : $presenter.append(canvas)
+        }
+        $('#capture').addEventListener('click', function () {
+          html2canvas($hostList, {
+            allowTaint: true,
+            width: $hostList.scrollWidth, height: $hostList.scrollHeight,
+            scrollX: 0, scrollY: 0,
+            x: 0, y: 0
+          }).then(function (canvas) {
+            present(canvas)
+          }, function () {
+            console.log('截图失败')
+          })
+        })
+        $('#capture_with_scroll').addEventListener('click', function () {
+          // var $cloned = $hostList.cloneNode()
+          ;[].slice.call($hostList.children).forEach(function ($host) {
+            $host.classList.add('capturing')
+            // $host.offsetHeight
+          })
+          html2canvas($hostList, {
+            allowTaint: true,
+            bacgkroundColor: '#000',
+            width: $hostList.scrollWidth, height: $hostList.scrollHeight,
+            windowWidth: 10000, windowHeight: 10000,
+            scrollX: 0, scrollY: 0,
+            x: 0, y: 0
+          }).then(function (canvas) {
+            present(canvas)
+            console.log(canvas.toDataURL())
+          }, function () {
+            console.log('截图失败')
+          }).finally(function () {
+            ;[].slice.call($hostList.children).forEach(function ($host) {
+              $host.classList.remove('capturing')
+            })
+          })
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    （第一种截图可能会有内容重叠：比如当应用数量过多，高度比 margin-bottom 还大时）
+    <br>
+    （第二种截图会闪动一下，但是不会有高度问题，内容不会重叠）
+    <div id="root">
+      <div class="oprs">
+        <button id="capture">Capture</button>
+        <br>
+        <button id="capture_with_scroll">Capture With Scroll</button>
+      </div>
+      <div class="host-list">
+        <ul class="host">
+          <li class="application-header">主机1</li>
+          <li class="application">主机1-应用1</li>
+          <li class="application">主机1-应用2</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机2</li>
+          <li class="application">主机2-应用1</li>
+          <li class="application">主机2-应用2</li>
+          <li class="application">主机2-应用3</li>
+          <li class="application">主机2-应用4</li>
+        </ul>
+        <ul class="host">
+            <li class="application-header">主机3</li>
+          <li class="application">主机3-应用1</li>
+          <li class="application">主机3-应用2</li>
+          <li class="application">主机3-应用3</li>
+          <li class="application">主机3-应用4</li>
+          <li class="application">主机3-应用5</li>
+          <li class="application">主机3-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机4</li>
+          <li class="application">主机4-应用1</li>
+          <li class="application">主机4-应用2</li>
+          <li class="application">主机4-应用3</li>
+          <li class="application">主机4-应用4</li>
+          <li class="application">主机4-应用5</li>
+          <li class="application">主机4-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机5</li>
+          <li class="application">主机5-应用1</li>
+          <li class="application">主机5-应用2</li>
+          <li class="application">主机5-应用3</li>
+          <li class="application">主机5-应用4</li>
+          <li class="application">主机5-应用5</li>
+          <li class="application">主机5-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机6</li>
+          <li class="application">主机6-应用1</li>
+          <li class="application">主机6-应用2</li>
+          <li class="application">主机6-应用3</li>
+          <li class="application">主机6-应用4</li>
+          <li class="application">主机6-应用5</li>
+          <li class="application">主机6-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机7</li>
+          <li class="application">主机7-应用1</li>
+          <li class="application">主机7-应用2</li>
+          <li class="application">主机7-应用3</li>
+          <li class="application">主机7-应用4</li>
+          <li class="application">主机7-应用5</li>
+          <li class="application">主机7-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机8</li>
+          <li class="application">主机8-应用1</li>
+          <li class="application">主机8-应用2</li>
+          <li class="application">主机8-应用3</li>
+          <li class="application">主机8-应用4</li>
+          <li class="application">主机8-应用5</li>
+          <li class="application">主机8-应用6</li>
+          <li class="application">主机8-应用6</li>
+          <li class="application">主机8-应用6</li>
+          <li class="application">主机8-应用6</li>
+          <li class="application">主机8-应用6</li>
+          <li class="application">主机8-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机9</li>
+          <li class="application">主机9-应用1</li>
+          <li class="application">主机9-应用2</li>
+          <li class="application">主机9-应用3</li>
+          <li class="application">主机9-应用4</li>
+          <li class="application">主机9-应用5</li>
+          <li class="application">主机9-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机10</li>
+          <li class="application">主机10-应用1</li>
+          <li class="application">主机10-应用2</li>
+          <li class="application">主机10-应用3</li>
+          <li class="application">主机10-应用4</li>
+          <li class="application">主机10-应用5</li>
+          <li class="application">主机10-应用6</li>
+        </ul>
+        <ul class="host">
+          <li class="application-header">主机11</li>
+          <li class="application">主机11-应用1</li>
+          <li class="application">主机11-应用2</li>
+          <li class="application">主机11-应用3</li>
+          <li class="application">主机11-应用4</li>
+          <li class="application">主机11-应用5</li>
+          <li class="application">主机11-应用6</li>
+        </ul>
+      </div>
+      <div class="presenter"></div>
+    </div>
+  </body>
+</html>

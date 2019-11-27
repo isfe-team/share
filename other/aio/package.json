@@ -1,0 +1,20 @@
+{
+  "name": "flow-chart",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "html2canvas": "^1.0.0-alpha.12",
+    "jsplumb": "^2.8.6",
+    "lodash": "^4.17.11"
+  }
+}

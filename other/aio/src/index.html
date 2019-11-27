@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <title>Flow Chart</title>
+    <script src="../node_modules/jsplumb/dist/js/jsplumb.js"></script>
+    <script src="../node_modules/lodash/lodash.js"></script>
+    <style>
+      html, body, #root {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 1em;
+        overflow: hidden;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #root {
+        display: flex;
+      }
+
+      #flow_chart_diagram_wrapper {
+        overflow: auto;
+        flex: 1;
+        /* border: 1px solid #f58; */
+        border-radius: 4px;
+        box-shadow: 0 0 5px #000;
+      }
+
+      #flow_chart_diagram {
+        position: relative;
+        overflow: hidden;
+        min-width: 100%;
+        min-height: 100%;
+        background: #f9d2d2;
+      }
+
+      #flow_chart_palette {
+        flex: 0 0 200px;
+        padding: 1em;
+      }
+
+      .user-select-defeat * {
+        user-select: none;
+      }
+
+      .drag-zoom-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        cursor: move;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+      }
+
+      .drag-zoom-wrapper.moving {
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+      }
+
+      .jtk-connector {
+        z-index: 12;
+      }
+
+      .jtk-endpoint {
+        z-index: 12;
+      }
+
+      .jtk-endpoint-anchor {
+        cursor: default;
+      }
+
+      .jtk-drag-hover {
+        outline:4px solid cornflowerblue;
+      }
+
+      .flow-chart-group {
+        position: absolute;
+        width: 260px;
+        height: 300px;
+        /* z-index: 10; */
+        border-radius: 4px;
+        background-color: #efefef;
+        font-size: 12px;
+        cursor: move;
+      }
+
+      .flow-chart-group.jtk-group-collapsed {
+        height: 40px !important;
+      }
+
+      .flow-chart-group .flow-chart-group-header {
+        display: flex;
+        height: 30px;
+        background: #629f8d
+      }
+
+      .flow-chart-group .flow-chart-node-wrapper .flow-chart-node {
+        border: 1px solid #629f8d;
+      }
+
+      .flow-chart-group-title {
+        flex: 1;
+      }
+
+      .flow-chart-group .flow-chart-group-oprs {
+        display: flex;
+        align-items: center;
+        flex: 0 0 60px;
+      }
+
+      .flow-chart-group .flow-chart-group-oprs .flow-chart-group-opr {
+        width: 20px;
+        height: 20px;
+        /* 略微小一点 不然位置很奇怪 */
+        line-height: 18px;
+        margin-right: 10px;
+        border-radius: 50%;
+        font-size: 16px;
+        background-color: #fff;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .flow-chart-group .flow-chart-group-oprs .flow-chart-group-opr.flow-chart-group-opr-del {
+        background-color: #f58;
+      }
+
+      .flow-chart-group .flow-chart-group-oprs .flow-chart-group-opr.flow-chart-group-opr-fit::after {
+        content: 'f';
+      }
+
+      .flow-chart-group .flow-chart-group-oprs .flow-chart-group-opr.flow-chart-group-opr-del::after {
+        content: 'x';
+      }
+
+      .flow-chart-group .flow-chart-group-oprs .flow-chart-group-opr.flow-chart-group-opr-collapse::after {
+        content: '-';
+      }
+
+      .flow-chart-group.jtk-group-collapsed .flow-chart-group-oprs .flow-chart-group-opr.flow-chart-group-opr-collapse::after {
+        content: '+';
+      }
+
+      .flow-chart-group.jtk-group-collapsed .flow-chart-group-content,
+      .flow-chart-group.jtk-group-collapsed .flow-chart-node-wrapper {
+        display: none;
+      }
+
+      .flow-chart-node-wrapper {
+        position: absolute;
+        z-index: 12;
+      }
+
+      .flow-chart-node {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 180px;
+        height: 80px;
+        border: 1px solid #EEE;
+        border-radius: 2px;
+        background-color: #EFEFEF;
+        cursor: default;
+        box-shadow: 0 0 3px #B1B1B1,
+                    0 0 1.5px #EFEFEF;
+      }
+
+      .flow-chart-node .flow-chart-node-icon-close {
+        position: absolute;
+        top: -4px;
+        right: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .flow-chart-node .drag-starter {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
+        background-color: rgb(250, 143, 175);
+      }
+
+      .flow-chart-node .drag-starter:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <div id="flow_chart_diagram_wrapper" class="drag-zoom-wrapper">
+        <div id="flow_chart_diagram"></div>
+      </div>
+      <div id="flow_chart_palette">
+        <button id="add_node">Add Node</button>
+        <button id="add_group">Add Group</button>
+        <button id="fit_diagram">Fit Diagram</button>
+        <button id="get_diagram_data">Get Diagram Data</button>
+        <button id="restore_by_data">Restore By Data</button>
+        <textarea rows="10" cols="40" id="raw_data" placeholder="raw data"></textarea>
+      </div>
+    </div>
+
+    <script src="./utils/constants.js"></script>
+    <script src="./utils/helpers.js"></script>
+    <script src="./utils/jsplumbHelpers.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
