@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./lodash.js"></script>
+    <script>
+        // 这里我们创建一个构造函数
+        function Scope() {
+            this.$$watchers = [];
+        }
+
+        // 我们给构造函数增加一个$watch方法
+        Scope.prototype.$watch = function(watchFn, listenerFn) {
+            var watcher = {
+                watchFn: watchFn,
+                listenerFn: listenerFn
+            };
+            this.$$watchers.push(watcher);
+        };
+
+        // 我们给构造函数增加一个$digest方法，也就是脏值检测
+        Scope.prototype.$digest = function() {
+            var self = this;
+            // 循环每一个监听对象
+            _.forEach(this.$$watchers, function(watch) {
+                var newValue = watch.watchFn(self);
+                var oldValue = watch.last;
+                // 如果新旧值不相同，认为脏了，执行相应的监听方法
+                if (newValue !== oldValue) {
+                    watch.listenerFn(newValue, oldValue, self);
+                }
+                watch.last = newValue;
+            }); 
+        };
+
+        var scope = new Scope(); // 创建一个scope实例
+        scope.firstName = 'Joe'; // 给scope添加属性
+        scope.counter = 0;
+
+        // 监控scope.firstName
+        scope.$watch(
+            function(scope) {
+                return scope.firstName;
+            },
+            function(newValue, oldValue, scope) { // 如果监控到变化，则scope.counter+1
+                scope.counter++;
+            }
+        );
+
+        // 此时我们没有执行脏值检测,直接打印scope.counter,会是什么结果？
+        console.log(scope.counter);
+
+        // 我们运行了一次$digest，之后scope.counter会是什么？
+        scope.$digest();
+        console.log(scope.counter);
+
+        // 我们并未修改scope.firstName的值，
+        // 执行了scope.$digest，scope.counter又会是什么呢？
+        scope.$digest();
+        scope.$digest();
+        console.log(scope.counter);
+
+        // 我们改变了scope.firstName值之后再次执行脏值检测，此时scope.counter有变化吗？
+        scope.firstName = 'Jane';
+        scope.$digest();
+        console.log(scope.counter);
+    </script>
+    <!-- 在angular.js提供的内部方法中,angular.js已经自己执行了$applay(),所以不需要手动去执行 -->
+</body>
+</html>
