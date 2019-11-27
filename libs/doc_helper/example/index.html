@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Meta tags that set up the page as a mobile page   -->
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+  <meta charset="UTF-8"/>
+  <title>DocHelper Demo</title>
+  <link rel="stylesheet" type="text/css" media="screen,print" href="./style.css"/>
+</head>
+<body>
+  <div id="operations">
+    <input id="time" placeholder="0~7199980">
+    <button id="goto">Goto</button>
+    <input id="keyword" value="小记者" placeholder="...">
+    <button id="search">Search</button>
+    <button id="prev">上一个</button>
+    <button id="next">下一个</button>
+    <span>共<span id="total">0</span>个
+    <span>当前第<span id="current">0</span>个</span>
+    <input id="audio_selector" type="file" accept=".wav,.pcm,.ogg">
+  </div>
+  <div id="voices_wrapper"></div>
+  <script src="../vendors/template.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+  <!-- <script src="./test.js"></script> -->
+  <script src="./test.1.js"></script>
+  <script src="../h.js"></script>
+  <script>
+    // // impure
+    function transformListData (voices) {
+      for (var _ = 0, vlen = voices.length; _ < vlen; ++_) {
+        var voice = voices[_]
+        for (var i = 0, rowLen = voice.length; i < rowLen; ++i) {
+          var row = voice[i]
+          row.words = row.content.split(' ')
+          row.words[0] = row.channel + '  ' + row.words[0]
+          delete row.content
+          var times = row.time.split(' ')
+          for (var j = 0, tlen = times.length; j < tlen; ++j) {
+            var t = times[j].split(',')
+            times[j] = [+t[0], +t[1]]
+          }
+          row.times = times
+          delete row.time
+        }
+      }
+      return voices
+    }
+    var voices = transformListData(MOCK_LIST.value.voiceAudio)
+    var $voicesWrapper = $('#voices_wrapper')
+    var helper = new DocHelper({
+      css: {
+        emSearchHighlight: 'fucking',
+        haveBeenRead: 'red',
+        searchHighlight: 'search-rc'
+      },
+      scroll: {
+        maxScrollDelta: 30,
+        minHeightToStartAutoScroll: 360
+      },
+      $container: $voicesWrapper,
+      dataTransformer: function id (x) { return x },
+      rawData: voices
+    })
+    helper.init()
+    // 每一个分词点击的时候做的事情
+    function handleWordClick () {
+      var $this = $(this)
+      if ($this.hasClass('single')) {
+        return
+      }
+      var $parent = $this.parent()
+      var voiceIndex = $parent.parent().attr('index')
+      var channelIndex = $parent.attr('index')
+      var wordIndex = $this.attr('index')
+      var voice = voices[voiceIndex]
+      var channel = voice[channelIndex]
+      var word = channel.words[wordIndex]
+      var times = channel.times[wordIndex]
+      var startTime = times[0]
+      // console.log('word', channel, word, times)
+      helper.gotoCertainTime(voiceIndex, startTime)
+    }
+
+    /**
+     * @param {StepType} type
+     */
+    function handleStep (type) {
+      helper.stepTo(type, function (error, search) {
+        if (error) {
+          if (helper.isDocHelperError(error)) {
+            alert(error.message)
+            return
+          }
+          alert('异常')
+          return
+        }
+        $('#current').text(search.currentIndex + 1)
+      })
+    }
+
+    function bindUIEvents () {
+      $voicesWrapper.on('click', '.word', handleWordClick)
+      $('#goto').on('click', function (evt) {
+        gotoTime(+$('#time').val())
+      })
+      $('#search').on('click', function (evt) {
+        var keyword = $('#keyword').val()
+        helper.searchByKeyword(keyword, function (error, search) {
+          if (error) {
+            console.error(error)
+            return
+          }
+          $('#total').text(search.total)
+          $('#current').text(search.currentIndex + 1)
+        })
+      })
+      $('#prev').on('click', handleStep.bind(null, -1))
+      $('#next').on('click', handleStep.bind(null, 1))
+    }
+    bindUIEvents()
+
+    var voiceIndex = 0
+    var start = voices[voiceIndex][0].times[0][0] // 0
+    var endTimes = voices[voiceIndex][voices[voiceIndex].length - 1].times
+    var end = endTimes[endTimes.length - 1][1]
+    var delta = 6000
+    var timer = setInterval(function () {
+      start += delta
+      if (start >= end) {
+        start - delta !== end && helper.gotoCertainTime(voiceIndex, end, true)
+        voiceIndex += 1
+        if (voiceIndex < voices.length) {
+          start = voices[voiceIndex][0].times[0][0] // 0
+          endTimes = voices[voiceIndex][voices[voiceIndex].length - 1].times
+          end = endTimes[endTimes.length - 1][1]
+        } else {
+          clearInterval(timer)
+        }
+        return
+      }
+      helper.gotoCertainTime(voiceIndex, start, true)
+    }, 800)
+    // clearInterval(timer)
+  </script>
+</body>
+</html>

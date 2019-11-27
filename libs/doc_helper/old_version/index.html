@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Meta tags that set up the page as a mobile page   -->
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+  <meta charset="UTF-8"/>
+  <title>Highlight demo</title>
+  <link rel="stylesheet" type="text/css" media="screen,print" href="style.css"/>
+</head>
+<body>
+  <div id="operations">
+    <input id="time" placeholder="0~7199980">
+    <button id="goto">Goto</button>
+    <input id="keyword" value="小记者" placeholder="...">
+    <button id="search">Search</button>
+    <button id="prev">上一个</button>
+    <button id="next">下一个</button>
+    <span>共<span id="total">0</span>个
+    <span>当前第<span id="current">0</span>个</span>
+  </div>
+  <ol id="list_wrapper"></ol>
+  <script src="template.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+  <script src="test.js"></script>
+  <script src="h.js"></script>
+  <script>
+    var channels = highlightUtil.transformListData(MOCK_LIST.value[0])
+    var $listWrapper = $('#list_wrapper')
+    $listWrapper.html(highlightUtil.generateChannelsContent(channels))
+    var $list = $listWrapper.children()
+    // 列表上次 render 的配置
+    var prevConfig = null
+    // 前一次搜索到的结果集合
+    var prevSearchedWords = []
+    // 当前高亮的搜索到的结果
+    var currentCWord = null
+    // 搜索结果的总和
+    var total = 0
+    // 当前是第几个
+    var current = 0
+
+    // 每一个分词点击的时候做的事情
+    function handleWordClick (evt) {
+      var $target = evt.target
+      if ($target.className.indexOf('word') === -1) {
+        return
+      }
+      var channelIndex = $target.parentElement.getAttribute('index')
+      var wordIndex = $target.getAttribute('index')
+      var channel = channels[channelIndex]
+      var word = channel.words[wordIndex]
+      var times = channel.times[wordIndex]
+      var startTime = times[0]
+      // console.log('word', channel, word, times)
+      gotoTime(startTime)
+    }
+
+    // 跳转到某个时间，考虑是否集成到 hightlightUitl 里面
+    function gotoTime (time) {
+      var config = highlightUtil.getHighlightConfigByTime(channels, time)
+      if (!prevConfig) {
+        highlightUtil.renderListByConfig($list, config)
+      } else {
+        var patch = highlightUtil.diff(config, prevConfig)
+        highlightUtil.applyPatch($list, patch)
+      }
+      prevConfig = config
+      highlightUtil.scrollToLastHaveBeenReadBottom($list, config)
+    }
+
+    // enum Type { prev = -1, next = 1 }
+    function handleStep (type) {
+      if (!currentCWord) {
+        throw new Error('异常操作，需要先搜索')
+      }
+      var cword = getSteppedWord(currentCWord.rowIndexInWord, currentCWord.columnIndexInWord)
+      if (!cword) {
+        alert('没有' + (type === -1 ? 'prev' : 'next'))
+        return
+      }
+      current += type
+      $('#current').text(current)
+      fuckCertainWord(currentCWord, true)
+      fuckCertainWord(cword)
+      currentCWord = cword
+    }
+    // step +1 / -1
+    // interface CWord { rowINdexInWord: number, columnIndexInWord: number }
+    function getSteppedWord (rowIndexInWord, columnIndexInWord, prev) {
+      var step = !!prev ? -1 : 1
+      columnIndexInWord += step
+
+      var word = prevSearchedWords[rowIndexInWord]
+      if (columnIndexInWord < 0) {
+        if (rowIndexInWord === 0) {
+          return null
+        }
+        rowIndexInWord -= 1
+        columnIndexInWord = prevSearchedWords[rowIndexInWord].fullKeywordColumns.length - 1
+      }
+      if (columnIndexInWord === word.fullKeywordColumns.length) {
+        if (rowIndexInWord === prevSearchedWords.length - 1) {
+          return null
+        }
+        rowIndexInWord += 1
+        columnIndexInWord = 0
+      }
+      return {
+        rowIndexInWord: rowIndexInWord,
+        columnIndexInWord: columnIndexInWord
+      }
+    }
+    function toWord (word) {
+      if (currentCWord) {
+        fuckCertainWord(currentCWord, true)
+      }
+      fuckCertainWord(word)
+    }
+    var FUCKING_CLASS = 'fucking'
+    function fuckCertainWord (cword, prevent) {
+      var row = prevSearchedWords[cword.rowIndexInWord]
+      var $words = $list.eq(row.rowIndex).children()
+      var words = row.fullKeywordColumns[cword.columnIndexInWord]
+      var handler = prevent ? $.prototype.removeClass : $.prototype.addClass
+      for (var i = 0, wlen = words.length; i < wlen; ++i) {
+        handler.call($words.eq(words[i]), FUCKING_CLASS)
+      }
+      if (!prevent) {
+        highlightUtil.scrollToCertainWord($list, { rowIndex: row.rowIndex, columnIndex: words[0] }, true)
+      }
+    }
+    
+    function bindUIEvents () {
+      $listWrapper.on('click', handleWordClick)
+      $('#goto').on('click', function (evt) {
+        gotoTime(+$('#time').val())
+      })
+      $('#search').on('click', function (evt) {
+        if (currentCWord) {
+          fuckCertainWord(currentCWord, true)
+        }
+        var keyword = $('#keyword').val()
+        var trimed = highlightUtil.trimAllBlanks(keyword)
+        if (!trimed) {
+          highlightUtil.log('No keyword')
+          return
+        }
+        var words = highlightUtil.getWordsByKeyword(channels, trimed)
+        total = 0
+        current = 0
+        for (var i = 0, wlen = words.length; i < wlen; ++i) {
+          total += words[i].fullKeywordColumns.length 
+        }
+        $('#total').text(total)
+        highlightUtil.renderWordsToCertainClass($list, prevSearchedWords, highlightUtil.SEARCH_HIGHLIGHT_CLASS, true)
+        highlightUtil.renderWordsToCertainClass($list, words, highlightUtil.SEARCH_HIGHLIGHT_CLASS)
+        prevSearchedWords = words
+        if (words.length > 0) {
+          currentCWord = {
+            rowIndexInWord: 0,
+            columnIndexInWord: 0
+          }
+          current = 1
+          $('#current').text(current)
+          fuckCertainWord(currentCWord)
+        } else {
+          currentCWord = null
+        }
+      })
+      $('#prev').on('click', handleStep.bind(null, -1))
+      $('#next').on('click', handleStep.bind(null, 1))
+    }
+    bindUIEvents()
+
+    var start = 0
+    var end = 7199980
+    var timer = setInterval(function () {
+      start += 2000
+      if (start >= end) {
+        start = 0
+        clearInterval(timer)
+        return
+      }
+      gotoTime(start)
+    }, 800)
+  </script>
+</body>
+</html>

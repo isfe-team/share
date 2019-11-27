@@ -1,0 +1,11 @@
+{
+  "name": "doc_helper",
+  "version": "1.0.0",
+  "description": "Optimize doc operations",
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": ["diff", "performance", "dom"],
+  "main": "./h.js",
+  "author": "bqliu@iflytek.com",
+  "license": "MIT"
+}
